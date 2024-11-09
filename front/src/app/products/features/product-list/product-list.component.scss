@@ -1,0 +1,117 @@
+:host {
+    display: block;
+    height: 100%;
+    overflow: auto;
+}
+
+.product-list,
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+  padding: 20px;
+}
+.mat-mdc-card {
+  height: 470px;
+}
+.product-item,
+.product-card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+  flex: 0 1 calc(33% - 20px);
+}
+
+mat-card-header {
+  text-align: center;
+  display: block;
+  padding: 15px;
+}
+
+mat-card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  margin:auto;
+  object-fit: contain;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  border: 1px solid #ddd;
+  transform: scale(1.05);
+}
+
+a:hover{
+  text-transform: uppercase;
+  transform: scale(1.05);
+}
+
+.product-card:hover {
+  border: 2px solid #ddd;
+  transform: scale(1.05);
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+mat-card-actions .quantity-controls input{
+  width: 75px;
+}
+
+mat-card-footer {
+  padding: 10px;
+}
+
+mat-card-footer button {
+  padding: 0;
+}
+
+.add-snackbar {
+  background-color: green;
+  color: white;
+  font-size: 16px;
+}
+
+.remove-snackbar {
+  background-color: red;
+  color: white;
+  font-size: 16px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.status-instock {
+  color: green;
+  font-weight: bold;
+}
+
+.status-lowstock {
+  color: orange;
+  font-weight: bold;
+}
+
+.status-outofstock {
+  color: red;
+  font-weight: bold;
+}

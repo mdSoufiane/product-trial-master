@@ -1,0 +1,37 @@
+<h1 class="text-center">Votre Panier</h1>
+
+<mat-card *ngIf="cartItems.length > 0" class="cart-container">
+  <mat-card-header>
+    <mat-card-title>Produits dans le panier</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div *ngFor="let item of cartItems" class="cart-item">
+      <img [src]="item.image" alt="{{ item.name }}" class="cart-item-image">
+      <div class="cart-item-details">
+        <h3>{{ item.name }}</h3>
+        <p>Prix: {{ item.price | currency }}</p>
+        <p>Quantité: {{ item.quantity }}</p>
+        <p class="sous-total">Sous-total: {{ item.price * item.quantity | currency }}</p>
+        <mat-card-actions>
+          <button mat-raised-button color="warn" (click)="removeFromCart(item)">Retirer du panier</button>
+          <div class="quantity-controls">
+            <button mat-raised-button (click)="updateCartItemQuantity(item, item.quantity - 1)">-</button>
+            <span>{{ item.quantity }}</span>
+            <button mat-raised-button (click)="updateCartItemQuantity(item, item.quantity + 1)">+</button>
+          </div>
+        </mat-card-actions>
+
+      </div>
+    </div>
+    <div class="total-amount">
+      <h4>Total: {{ total | currency }}</h4>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="cartItems.length === 0" class="empty-cart">
+  <mat-card-content>
+    <p>Votre panier est vide.</p>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,69 @@
+<h1 class="text-center">Liste des produits</h1>
+
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+
+<p-button label="Créer produit" (onClick)="onCreate()" class="block text-center"/>
+
+<div class="product-grid">
+  <div class="product-card" *ngFor="let product of obs | async" [@fadeIn]>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image [src]="product.image" alt="{{ product.name }}">
+      <mat-card-content>
+        <p>{{ product.description }}</p>
+        <p [ngClass]="product.inventoryStatus === 'INSTOCK'
+                    ? 'status-instock'
+                    : product.inventoryStatus === 'LOWSTOCK'
+                      ? 'status-lowstock'
+                      : 'status-outofstock'">
+          {{ product.inventoryStatus === 'INSTOCK'
+          ? 'IN STOCK'
+          : product.inventoryStatus === 'LOWSTOCK'
+            ? 'LOW STOCK'
+            : 'OUT OF STOCK' }}
+        </p>
+        <p>{{ product.price | currency }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="quantity-controls">
+          <label>Quantity:</label>
+          <input matInput type="number" [(ngModel)]="quantities[product.id]" (change)="updateQuantity(product.id, quantities[product.id])" min="1">
+        </div>
+        <button mat-raised-button color="primary" (click)="addToCart(product)">
+          Ajouter au panier
+        </button>
+        <button mat-raised-button color="warn" (click)="removeFromCart(product)">
+          Retirer du panier
+        </button>
+      </mat-card-actions>
+      <a mat-button [routerLink]="['/products', 'detail', product.id]">
+        Voir détails
+      </a>
+      <mat-card-footer>
+        <p-button severity="secondary" (onClick)="onUpdate(product)">
+          <i class="pi pi-pencil"></i>
+        </p-button>
+        <p-button severity="danger" (onClick)="onDelete(product)">
+          <i class="pi pi-trash"></i>
+        </p-button>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</div>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+               showFirstLastButtons>
+</mat-paginator>
+
+<p-dialog [(visible)]="isDialogVisible"
+          [style]="{ width: '50vw' }"
+          header="Ajout/Edition produit">
+  <app-product-form
+    [product]="editedProduct()"
+    [isCreation]="isCreation"
+    (save)="onSave($event)"
+    (cancel)="onCancel()"
+  />
+</p-dialog>

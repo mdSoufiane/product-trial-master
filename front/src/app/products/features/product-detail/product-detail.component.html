@@ -1,0 +1,46 @@
+<!--<div *ngIf="product">-->
+<!--  <h2>{{ product.name }}</h2>-->
+<!--  <img [src]="product.image" alt="{{ product.name }}" />-->
+<!--  <p>{{ product.description }}</p>-->
+<!--  <p>Prix : {{ product.price }}</p>-->
+<!--  <button (click)="addToCart(product)">Ajouter au panier</button>-->
+<!--</div>-->
+<mat-card class="product-detail-card">
+  <mat-card-header class="product-header">
+    <mat-card-title>{{ product.name }}</mat-card-title>
+  </mat-card-header>
+
+  <div class="product-image-container">
+    <img mat-card-image [src]="product.image" alt="{{ product.name }}" class="product-image">
+  </div>
+
+  <mat-card-content>
+    <h3>Description</h3>
+    <p>{{ product.description }}</p>
+
+    <p>{{ product.price | currency }}</p>
+    <div class="inventory-status">
+      <span [ngClass]="product.inventoryStatus === 'INSTOCK'
+                      ? 'status-instock'
+                      : product.inventoryStatus === 'LOWSTOCK'
+                                                    ? 'status-lowstock'
+                                                    : 'status-outofstock'"
+      >
+        {{ product.inventoryStatus === 'INSTOCK'
+        ? 'IN STOCK'
+        : product.inventoryStatus === 'LOWSTOCK'
+          ? 'LOW STOCK'
+          : 'OUT OF STOCK' }}
+      </span>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="addToCart(product)">Add to Cart</button>
+  </mat-card-actions>
+
+  <div class="go-back">
+    <button mat-button routerLink="/products/list">Back to Products</button>
+  </div>
+</mat-card>
+

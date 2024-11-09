@@ -1,0 +1,37 @@
+.cart-container {
+  max-height: 1000px;
+  overflow-y: auto;
+}
+
+.cart-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cart-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.cart-item-details {
+  flex-grow: 1;
+}
+mat-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
+.cart-item-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.total-amount {
+  font-weight: bold;
+  text-align: right;
+}
